@@ -71,3 +71,4 @@ churn_model_dashboard = dive_dashboard_v1(X = X_test_c, y = y_test_c, model = rf
 
 churn_model_dashboard
 ```
+![DIVE example](https://github.com/mbaucum1/DIVE/dive_example.png?raw=true)
