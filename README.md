@@ -16,7 +16,7 @@ Upcoming page edits:
  - Fall 2023: Clustering for identifying 'sub-models' that can be applied to homogenous portions of training data
 
 # Documentation:
-```
+```python
 dive_dashboard_v1(X, y, model, metric, higher_is_better = False, predict_proba = False, pdp_n_points = 20, h = 200, w = 200, barsize = 10, fontsize=12):
 ``` 
 Function arguments: 
@@ -33,7 +33,7 @@ Function arguments:
  - fontsize (default = 12): Default plot font size.
 
 # Example
-```
+```python
 #Packages required for dive_dashboard_v1 to work:
 import numpy as np
 import pandas as pd
