@@ -19,6 +19,8 @@ Upcoming page edits:
 ```
 dive_dashboard_v1(X, y, model, metric, higher_is_better = False, predict_proba = False, pdp_n_points = 20, h = 200, w = 200, barsize = 10, fontsize=12):
 ``` 
+Function arguments: 
+
  - X: Matrix or dataframe of predictor variables. 
  - y: Vector of outcomes. Currently, only regression or binary classification (but not multi-class classification) are supported. Binary outcomes should be formatted as 0/1.
  - metric: Accepts either 'rmse' (root mean squared error) or 'mse' (mean squared error) as string arguments, or a callable function that takes (y_true, y_predicted) as arguments and returns a score.
@@ -29,3 +31,43 @@ dive_dashboard_v1(X, y, model, metric, higher_is_better = False, predict_proba =
  - w (default = 200): Width of each plot.
  - barsize (default = 10): Default width of bars.
  - fontsize (default = 12): Default plot font size.
+
+# Example
+```
+#Packages required for dive_dashboard_v1 to work:
+import numpy as np
+import pandas as pd
+import altair as alt
+from altair import datum
+import warnings
+warnings.simplefilter(action='ignore', category=FutureWarning)
+
+#Loading in data: Telecom churn dataset from https://archive.ics.uci.edu/ml/datasets/Iranian+Churn+Dataset
+churn = pd.read_csv('Customer Churn.csv')
+churn.columns = ['Call Failure','Complaint','Subscription Length','Charge Amount','Seconds of Use','Frequency of Use',
+                 'Frequency of SMS','Distinct Called Numbers','Age Group','Tariff Plan','Active/Inactive','Age Num','Customer Value',
+                 'FN','FP','Churn']
+churn['Active/Inactive'] = churn['Active/Inactive'] - 1
+
+#Split into train and test sets
+from sklearn.model_selection import train_test_split
+xvars = [c for c in churn.columns if c not in ['Age Group','Seconds of Use','FN','FP','Churn']]
+X = churn[xvars]
+
+X_train_c, X_test_c, y_train_c, y_test_c = train_test_split(X, churn['Churn'], test_size = 0.3)
+
+#Train random forest predicting churn
+from sklearn.ensemble import RandomForestClassifier
+n_est = 500; depth = 10
+rf=RandomForestClassifier(max_features='sqrt',verbose=0,n_jobs=-1,max_samples=0.2,max_depth=depth,n_estimators=n_est, random_state=2030)
+rf.fit(X=X_train_c, y = y_train_c)
+
+#Create DIVE dashboard
+from sklearn.metrics import roc_auc_score
+churn_model_dashboard = dive_dashboard_v1(X = X_test_c, y = y_test_c, model = rf,
+                            metric = roc_auc_score, higher_is_better = True,
+                            predict_proba = True, pdp_n_points = 20,
+                            h = 200, w = 200, barsize = 10,fontsize=12)
+
+churn_model_dashboard
+```
