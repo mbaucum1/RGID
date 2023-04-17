@@ -14,3 +14,8 @@ Upcoming page edits:
  - Summer 2023: Additional algorithms for pairwise interaction estimation
  - Fall 2023: Allow users to see model performance under customized subsets of features
  - Fall 2023: Clustering for identifying 'sub-models' that can be applied to homogenous portions of training data
+
+# Documentation:
+```
+dive_dashboard_v1()
+``` 
