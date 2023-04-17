@@ -17,5 +17,15 @@ Upcoming page edits:
 
 # Documentation:
 ```
-dive_dashboard_v1()
+dive_dashboard_v1(X, y, model, metric, higher_is_better = False, predict_proba = False, pdp_n_points = 20, h = 200, w = 200, barsize = 10, fontsize=12):
 ``` 
+ - X: Matrix or dataframe of predictor variables. 
+ - y: Vector of outcomes. Currently, only regression or binary classification (but not multi-class classification) are supported. Binary outcomes should be formatted as 0/1.
+ - metric: Accepts either 'rmse' (root mean squared error) or 'mse' (mean squared error) as string arguments, or a callable function that takes (y_true, y_predicted) as arguments and returns a score.
+ - higher_is_better (default = False): Whether higher values on 'metric' indicate better model performance. Set to 'True' if using metrics such as accuracy, AUC, etc.
+ - pdp_n_points (default = 20).: Number of points for evaluting univariate partial dependence plots (PDPs).
+ - predict_proba (default = False): Set to 'True' to generate prediction's from the 'predict_proba()' method of 'model'. If left 'False', function will use model's 'predict' method (which may generate binary outputs rather than probability predictions, in the case of classifiers).
+ - h (default = 200): Height of each plot.
+ - w (default = 200): Width of each plot.
+ - barsize (default = 10): Default width of bars.
+ - fontsize (default = 12): Default plot font size.
