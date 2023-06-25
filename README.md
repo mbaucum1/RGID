@@ -16,7 +16,7 @@ Upcoming page edits:
  - Fall 2023: Clustering for identifying 'sub-models' that can be applied to homogenous portions of training data
 
 # RGID Example
-The [rgid_example] HTML file can be opened in any web browser, and visualizes an interactive RGID example using the simulated dataset described in the manuscript. Note that, due to file space limitations, hover actions are disabled in the example file. When run in a Jupyter Notebook, hovering over a given variable in Plot 1 will filter all other plots to that focal variable, and hovering over a variable in Plots 3 or 5 will filter Plots 4 and 6 (respectively) to that variable.
+The [rgid_example](https://github.com/mbaucum1/RGID/blob/main/rgid_example_6_25_23.html) HTML file can be opened in any web browser, and visualizes an interactive RGID example using the simulated dataset described in the manuscript. Note that, due to file space limitations, hover actions are disabled in the example file. When run in a Jupyter Notebook, hovering over a given variable in Plot 1 will filter all other plots to that focal variable, and hovering over a variable in Plots 3 or 5 will filter Plots 4 and 6 (respectively) to that variable.
 
 # Documentation:
 ```python
