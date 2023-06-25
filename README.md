@@ -15,6 +15,91 @@ Upcoming page edits:
  - Fall 2023: Allow users to see model performance under customized subsets of features
  - Fall 2023: Clustering for identifying 'sub-models' that can be applied to homogenous portions of training data
 
+```html
+<!DOCTYPE html>
+<html>
+<head>
+  <script src="https://cdn.jsdelivr.net/npm/vega@5.25.0"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vega-lite@5.9.3"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vega-embed@6.22.1"></script>
+</head>
+<body>
+  <div id="vis"/>
+  <script>
+    const spec = {
+  "config": {"view": {"continuousWidth": 400, "continuousHeight": 300}},
+  "hconcat": [
+    {
+      "vconcat": [
+        {
+          "mark": "bar",
+          "encoding": {
+            "x": {"field": "Value", "type": "quantitative"},
+            "y": {"field": "Level", "type": "nominal"}
+          },
+          "selection": {
+            "selector028": {"type": "multi", "on": "click", "encodings": ["y"]},
+            "selector027": {
+              "type": "single",
+              "on": "mouseover",
+              "encodings": ["y"]
+            }
+          }
+        },
+        {
+          "mark": "bar",
+          "encoding": {
+            "x": {"field": "Value", "type": "quantitative"},
+            "y": {"field": "Level", "type": "nominal"}
+          },
+          "transform": [{"filter": {"selection": "selector028"}}]
+        }
+      ]
+    },
+    {
+      "vconcat": [
+        {
+          "mark": "bar",
+          "encoding": {
+            "x": {"field": "Value", "type": "quantitative"},
+            "y": {"field": "Level", "type": "nominal"}
+          },
+          "selection": {
+            "selector028": {"type": "multi", "on": "click", "encodings": ["y"]},
+            "selector027": {
+              "type": "single",
+              "on": "mouseover",
+              "encodings": ["y"]
+            }
+          }
+        },
+        {
+          "mark": "bar",
+          "encoding": {
+            "x": {"field": "Value", "type": "quantitative"},
+            "y": {"field": "Level", "type": "nominal"}
+          },
+          "transform": [{"filter": {"selection": "selector028"}}]
+        }
+      ]
+    }
+  ],
+  "data": {"name": "data-7508b9ea34e9301d3bad1421a8b82b29"},
+  "$schema": "https://vega.github.io/schema/vega-lite/v4.17.0.json",
+  "datasets": {
+    "data-7508b9ea34e9301d3bad1421a8b82b29": [
+      {"Level": "a", "Value": 8},
+      {"Level": "b", "Value": 9},
+      {"Level": "c", "Value": 10}
+    ]
+  }
+};
+    vegaEmbed("#vis", spec, {mode: "vega-lite"}).then(console.log).catch(console.warn);
+  </script>
+</body>
+</html>
+```
+
 # Documentation:
 ```python
 dive_dashboard_v1(X, y, model, metric, higher_is_better = False, predict_proba = False, pdp_n_points = 20, h = 200, w = 200, barsize = 10, fontsize=12):
