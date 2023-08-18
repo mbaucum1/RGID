@@ -1,9 +1,9 @@
-# DIVE
-Python code and documentation for DIVE - Dashboard for Interpretable Variable Explanations.
+# RGID
+Python code and documentation for RGID - Rapid Global Interpretability Dashboard.
 
-DIVE is an interactive dashboard (built on the Altair visualization library) for exploring variable effects and interactions in machine learning models. Code originally presented at the 2023 INFORMS Business Analytics Conference in Aurora, CO.
+RGID is an interactive dashboard (built on the Altair visualization library) for exploring variable effects and interactions in machine learning models. Code originally presented at the 2023 INFORMS Business Analytics Conference in Aurora, CO.
 
-DIVE seeks to combine existing and novel interpretable ML visualizations, all in a single interactive dashboard that can be quickly produced from any scikit-learn or keras machine learning model. Planned dashboard components include:
+RGID seeks to combine existing and novel interpretable ML visualizations, all in a single interactive dashboard that can be quickly produced from any scikit-learn or keras machine learning model. Planned dashboard components include:
  - Variable importance scores (decomposed into linear, nonlinear, and interaction components)
  - Partial dependence (PD) plots and accumulated local effects (ALE) plots
  - Variable importance scores and PD plots for pairwise interactions (with considerable runtime advantages over existing packages)
@@ -20,7 +20,7 @@ The [rgid_example](https://github.com/mbaucum1/RGID/blob/main/rgid_example_6_25_
 
 # Documentation:
 ```python
-dive_dashboard_v1(X, y, model, metric, higher_is_better = False, predict_proba = False, pdp_n_points = 20, h = 200, w = 200, barsize = 10, fontsize=12):
+RGID_dashboard_v1(X, y, model, metric, higher_is_better = False, predict_proba = False, pdp_n_points = 20, h = 200, w = 200, barsize = 10, fontsize=12):
 ``` 
 Function arguments: 
 
@@ -37,7 +37,7 @@ Function arguments:
 
 # Example
 ```python
-#Packages required for dive_dashboard_v1 to work:
+#Packages required for RGID_dashboard_v1 to work:
 import numpy as np
 import pandas as pd
 import altair as alt
@@ -65,13 +65,13 @@ n_est = 500; depth = 10
 rf=RandomForestClassifier(max_features='sqrt',verbose=0,n_jobs=-1,max_samples=0.2,max_depth=depth,n_estimators=n_est, random_state=2030)
 rf.fit(X=X_train_c, y = y_train_c)
 
-#Create DIVE dashboard
+#Create RGID dashboard
 from sklearn.metrics import roc_auc_score
-churn_model_dashboard = dive_dashboard_v1(X = X_test_c, y = y_test_c, model = rf,
+churn_model_dashboard = RGID_dashboard_v1(X = X_test_c, y = y_test_c, model = rf,
                             metric = roc_auc_score, higher_is_better = True,
                             predict_proba = True, pdp_n_points = 20,
                             h = 200, w = 200, barsize = 10,fontsize=12)
 
 churn_model_dashboard
 ```
-![DIVE example](https://github.com/mbaucum1/DIVE/blob/main/dive_example.png?raw=true)
+![RGID example](https://github.com/mbaucum1/RGID/blob/main/RGID_example.png?raw=true)
