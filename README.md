@@ -1,7 +1,7 @@
 # RGID
 Python code and documentation for RGID - Rapid Global Interpretability Dashboard.
 
-RGID is an interactive dashboard (built on the Altair visualization library) for exploring variable effects and interactions in machine learning models. Code originally presented at the 2023 INFORMS Business Analytics Conference in Aurora, CO.
+RGID is an interactive dashboard (built on the Altair visualization library) for exploring variable effects and interactions in machine learning models. 
 
 RGID seeks to combine existing and novel interpretable ML visualizations, all in a single interactive dashboard that can be quickly produced from any scikit-learn or keras machine learning model. Planned dashboard components include:
  - Variable importance scores (decomposed into linear, nonlinear, and interaction components)
