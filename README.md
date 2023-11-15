@@ -9,12 +9,6 @@ RGID seeks to combine existing and novel interpretable ML visualizations, all in
  - Variable importance scores and PD plots for pairwise interactions (with considerable runtime advantages over existing packages)
  - Estimated model performance from user-defined subsets of features
 
-Upcoming page edits:
- - 4/18/2023: Limited code for generating interactive feature importance and partial dependence (PD) plots.
- - Summer 2023: Additional algorithms for pairwise interaction estimation
- - Fall 2023: Allow users to see model performance under customized subsets of features
- - Fall 2023: Clustering for identifying 'sub-models' that can be applied to homogenous portions of training data
-
 # RGID Example
 The [rgid_example](https://github.com/mbaucum1/RGID/blob/main/rgid_example_6_25_23.html) HTML file can be opened in any web browser, and visualizes an interactive RGID example using the simulated dataset described in the manuscript. Note that, due to file space limitations, hover actions are disabled in the example file. When run in a Jupyter Notebook, hovering over a given variable in Plot 1 will filter all other plots to that focal variable, and hovering over a variable in Plots 3 or 5 will filter Plots 4 and 6 (respectively) to that variable.
 
