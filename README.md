@@ -1,5 +1,5 @@
-# RGID
-Python code and documentation for RGID - Rapid Global Interpretability Dashboard.
+# RGID (Rapid Global Interpretability Dashboard): Fast, comprehensive, and interactive pattern discovery for black-box predictive models
+This repository contains Python code and documentation for RGID (Rapid Global Interpretability Dashboard).
 
 RGID is an interactive dashboard (built on the Altair visualization library) for exploring variable effects and interactions in machine learning models. 
 
