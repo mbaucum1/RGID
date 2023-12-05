@@ -1,0 +1,6 @@
+All analyses in the RGID manuscript were conducted in a single Jupyter Notebook, included in this repository.
+
+The repository loads in the RGID functions from the 'src' directory, then proceeds through three main sections:
+ - Primary simulation example
+ - Computational benchmark experiments
+ - SUD case study
