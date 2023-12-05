@@ -363,23 +363,25 @@ def feature_importance_scores(X, y, model, f, metric, grid_size = 20, partial_ou
     f_pdp, f_not_pdp, f_pdp_interp, pdp, h2, weights
     #f_pdp is not mean centered
 
-#Run feature importance function
-def run_rgid(X, y, model, metric, grid_size = 20, partial_out = True, h = 200, w = 200, barsize = 10,
-                  feature_limit = None,
-                  int_color = '#2ca02c', predict_proba = False,
-                  pdp2_band_width = 0.10, #quantile width of areas for moderated PDPs
-                  pdp3_band_width = 0.30,
-                  threeway_int_missing_threshold = 0.25,
-                  pdp_ips_trim_q = 0.9, #quantile for trimming propensity score weights
-                  epsilon = 0.00,
-                  interaction_quantiles = (0.25, 0.75),
-                  fontsize=12,
-                  threeway_int_limit = 10,
-                  propensity_samples = 1000,
-                  feature_imp_njobs = 1,
-                  propensity_njobs = 4,
-                  threeway_int_njobs = 4,
-                  allow_hover = True):
+def run_rgid(X, y, model, metric,
+             grid_size = 20,
+             partial_out = True,
+             h = 200, w = 200, barsize = 10,
+             feature_limit = None,
+             predict_proba = False,
+             pdp2_band_width = 0.10, #quantile width of areas for moderated PDPs
+             pdp3_band_width = 0.30,
+             threeway_int_missing_threshold = 0.25,
+             pdp_ips_trim_q = 0.9, #quantile for trimming propensity score weights
+             interaction_quantiles = (0.25, 0.75),
+             fontsize=12,
+             threeway_int_limit = 10,
+             propensity_samples = 1000,
+             feature_imp_njobs = 1,
+             propensity_njobs = 4,
+             threeway_int_njobs = 4,
+             allow_hover = True):
+  
   #Check that all features have nonzero variance
   if np.any(X.var(axis = 0) == 0):
     print(f'Features {np.where(X.var(axis=0) == 0)[0]} have zero variance. Please filter the dataset and trained model to features with non-zero variance')
@@ -700,7 +702,7 @@ def run_rgid(X, y, model, metric, grid_size = 20, partial_out = True, h = 200, w
         resid_h2 = np.sum((pdp2_final - pdp2_f1 - pdp2_f2)**2) / np.sum(pdp2_final**2)
 
         #################
-       
+
         #Interaction-length list, where each element is a feature-length list
         int_score_diffs.append(resid_h2)
 
@@ -922,8 +924,7 @@ def run_rgid(X, y, model, metric, grid_size = 20, partial_out = True, h = 200, w
                               feature_selector2_click, feature_selector3, feature_selector3_click, feature_selector4, feature_selector4_click]
 
   dom = ['(a) Linear','(b) Nonlin.','(c) Intxn']
-  int_color = int_color + 'FF'
-  ran = ['#1f77b4FF', '#17becfFF', int_color]
+  ran = ['#1f77b4FF', '#17becfFF', '#2ca02cFF']
 
   #Bar charts
   sort_order = ranked.sort_values('rank', ascending = True)['Feature'].values
