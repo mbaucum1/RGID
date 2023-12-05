@@ -991,7 +991,7 @@ def run_rgid(X, y, model, metric,
   timestamp_PD2ICE = timeit.default_timer()
 
   scale = alt.Scale(domain = int_df['Feature'].unique(),
-                                    range = list([int_color]*k))
+                                    range = list(['#2ca02cFF']*k))
   int_df_positive = int_df[int_df['Diff'] > 0]
   if int_df_positive.shape[0] > 5000:
     int_df_positive = int_df_positive.sort_values('Diff', ascending = False).iloc[0:5000,:]
