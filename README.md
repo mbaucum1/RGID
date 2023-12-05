@@ -14,8 +14,11 @@ Citaiton information will be added once the peer-review process concludes and th
 
 NEED TO ADD REPLICATION INSTRUCTIONS
 
-# RGID Example
-The [rgid_example](https://github.com/mbaucum1/RGID/blob/main/rgid_example.html) HTML file can be opened in any web browser, and visualizes an interactive RGID example using the simulated dataset described in the manuscript. Note that, due to file space limitations, hover actions are disabled in the example file. When run in a Jupyter Notebook, hovering over a given variable in Plot 1 will filter all other plots to that focal variable, and hovering over a variable in Plots 3 or 5 will filter Plots 4 and 6 (respectively) to that variable.
+# RGID Examples
+Both RGID examples from the manuscript - i.e., from the primary simulation analysis and the SUD case study - are saved to the main repository directory as HTML files.
+
+# Replication
+The repository contains the Jupyter Notebook used for all analyses. We also include the computed benchmark results; however, the SUD case study data and dashboard object are too large for Github's file size limitations. This issue will be resolved before publication of the paper.
 
 # Documentation:
 ```python
