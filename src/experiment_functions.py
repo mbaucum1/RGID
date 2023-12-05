@@ -108,3 +108,85 @@ def train_test_split(X, y, train_prop = 0.8):
     y_test = y[train_size:]
 
   return X_train, y_train, X_test, y_test
+
+#Functions for benchmark computational experiments
+
+def hsquared(model, f, X, grid_size = 20, predict_proba = False):
+  X = np.array(X)
+  points = cutpoints(X[:,f], grid_size)['values'].values
+  print(points)
+  grid_size = len(points)
+  preds_x = model.predict(X) if predict_proba == False else model.predict_proba(X)
+  #exp_dataset = np.tile(X, (X.shape[0],1))
+  exp_dataset = np.tile(X, (grid_size,1))
+  exp_dataset[:,f] = np.repeat(points, X.shape[0])
+  if len(np.repeat(points, X.shape[0])) != exp_dataset.shape[0]:
+    print('mismatch in imputed dataset and imputed feature')
+  # using predict.pre for a huge dataset may lead to errors, so split computations up in k parts:
+  k = 10
+  ids = np.random.choice(np.arange(k), exp_dataset.shape[0], replace = True)
+  yhat = np.zeros(exp_dataset.shape[0])
+  for i in np.arange(k):
+    yhat[ids==i] = model.predict(exp_dataset[ids==i,:]) if predict_proba == False else model.predict_proba(exp_dataset[ids==i,:])
+  i_xj = np.repeat(np.arange(grid_size), X.shape[0])
+  preds_xj = pd.Series(yhat).groupby(i_xj).mean() #preds_xj is a series, with the average predicted value for each xj
+  preds_xj = np.interp(X[:,f], points, preds_xj.to_numpy())
+
+  i_xnotj = np.tile( np.arange(X.shape[0]) , grid_size)
+  preds_xnotj = pd.Series(yhat).groupby(i_xnotj).mean()
+  # H should be calculated based on centered functions:
+  preds_x = preds_x - preds_x.mean()
+  preds_xj = (preds_xj - preds_xj.mean()) #.to_numpy()
+  preds_xnotj = (preds_xnotj - preds_xnotj.mean()).to_numpy()
+  return np.sum( (preds_x - preds_xj - preds_xnotj)**2) / np.sum(preds_x**2)
+
+def generate_random_data(n_t, _lambda, m, n, eigen_list, sn_ratio, seed):
+  eigen_a_c, eigen_b_c, eigen_a_g, eigen_b_g = eigen_list
+
+  #Set seed
+  np.random.seed(seed)
+
+  #Generate original features
+  mean_vec = np.zeros(m)
+  U_c = scipy.stats.ortho_group.rvs(dim=m)
+  D_c = np.diag(np.random.uniform(eigen_a_c, eigen_b_c, m)**2)
+  cov_matrix = U_c @ D_c @ U_c.T
+  X = np.random.multivariate_normal(mean_vec, cov_matrix, size = n)
+  for i in range(X.shape[1]):
+    X[:,i] = (X[:,i] - X[:,i].mean()) / np.std(X[:,i])
+  avg_cor = (np.abs(pd.DataFrame(X).corr()).sum().sum() - m) / (m**2 - m)
+  print('Average correlation is '+str(avg_cor))
+
+  #Generate target
+  a_l = np.random.uniform(-1, 1, n_t) #term coefficients
+  n_l = np.clip(
+      np.floor(np.random.exponential(_lambda, n_t) + 1.5).astype('int'),
+      a_min = None, a_max = m) #no. features in each term
+  z_l = [np.random.choice(range(m), _n_l, replace = False) for _n_l in n_l] #list of feature groups for each term
+  y = np.zeros((n,1))
+  for t in range(n_t):
+    mean_vec_l = np.random.normal(size = n_l[t]) #using a standard normal matrix for the mean vec (as in Friedman), though note that the original data matrix has covariance (and this one doesnt)
+    if n_l[t] > 1:
+      U_g = scipy.stats.ortho_group.rvs(dim=n_l[t])
+    else:
+      U_g = np.diag([1])
+    D_g = np.diag(np.random.uniform(eigen_a_g, eigen_b_g, n_l[t])**2)
+    cov_matrix_l = U_g @ D_g @ U_g.T
+
+    z = X[:,z_l[t]]
+    g = np.exp(-0.5*(((z - mean_vec_l.reshape(1,-1)) @ cov_matrix_l) * (z - mean_vec_l.reshape(1,-1))).sum(axis = 1))
+    g = g.reshape(-1,1)
+
+    y += a_l[t] * np.array(g)
+
+  y = y.reshape(-1)
+  #Now scale error according to s/n ratio
+  MAD = np.mean(np.abs(y - np.median(y))) #this is from Friedman 2001
+  error_sd = (1/sn_ratio * MAD) / 0.8 #because the MAD is about 0.8 times the MAD.
+  yerr = np.random.normal(loc = 0, scale = error_sd, size = len(y))
+  y_final = y + yerr
+  print('Ybar median abs. deviation is '+str(MAD))
+  print('Error median abs. deviation is '+str(np.mean(np.abs(yerr - np.median(yerr)))))
+
+  return X, y_final, z_l, a_l
+
