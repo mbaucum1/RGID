@@ -1,3 +1,10 @@
+#Dependencies
+import numpy as np
+import pandas as pd
+import scipy
+import sklearn
+import statsmodels.api as sm
+
 #Experimental functions
 #Function for generating dataset with k features, the first k_cor of which are correlated at r
 def generate_data(k = 6, cor_indices = None, n = 100000, r=0.5, seed = 2023):
