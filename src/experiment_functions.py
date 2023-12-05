@@ -49,13 +49,13 @@ def generate_response(data, linear_coefs, nonlinear_coefs, log_coefs, stepwise_c
   y_int = np.zeros(data.shape[0])
   for t, c, interaction_type in zip(interaction_tuples, int_coefs, interaction_types):
     if interaction_type == 'linear':
-      y_int += c * np.product(data[:, t], axis = 1)
+      y_int += c * np.prod(data[:, t], axis = 1)
     if interaction_type == 'nonlinear':
       y_int += c * (data[:,t[0]]**nonlinear_exp) * (data[:,t[1]]**nonlinear_exp)
     if interaction_type == 'stepwise':
-      y_int += c * data[:,t[0]] * np.product( (data[:,t[1:]] > stepwise_cutoff), axis = 1)
+      y_int += c * data[:,t[0]] * np.prod( (data[:,t[1:]] > stepwise_cutoff), axis = 1)
     if interaction_type == 'log': #note: Subtracting 1 to effectively mean-center the log-functions
-      y_int += c * data[:,t[0]] * np.product(np.log(np.clip(data[:,t[1:]] + log_adjust,a_min =.001,a_max=None)) - 1, axis = 1)
+      y_int += c * data[:,t[0]] * np.prod(np.log(np.clip(data[:,t[1:]] + log_adjust,a_min =.001,a_max=None)) - 1, axis = 1)
 
   ybar = y_linear + y_nonlinear + y_stepwise + y_log + y_int
   print(f'Linear, nonlinear, stepwise, and log SD are {np.std(y_linear)},{np.std(y_nonlinear)},{np.std(y_stepwise)},{np.std(y_log)}')
