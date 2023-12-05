@@ -3,5 +3,7 @@ This directory contains result plots from the RGID manuscript.
 Note that, for all RGID results, we have included the raw HTML copies of both dashboards (the primary simulation example and SUD case study), 
 which were filtered and screenshotted for the manuscript.
 
+Also note that, in the screenshot of computational results, 'DIVE' was the working acronym for RGID during analysis.
+
 Finally, note that the computational benchmark results are included in the 'data' file, to make it easier for researchers who wish to read these into 
 the Jupyter notebook to produce the metrics and plots from the manuscript.
