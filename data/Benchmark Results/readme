@@ -1,0 +1,4 @@
+This repository contains all benchmark results from the RGID manuscript.
+
+NOTE: A few individual results files need to be decompressed from .zip format (compression necessary due to Github file size limits).
+Upon decompressing, you may need to manually add the .joblib extension back to the file.
