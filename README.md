@@ -11,7 +11,7 @@ Citaiton information will be added once the peer-review process concludes and th
 NEED TO ADD REPLICATION INSTRUCTIONS
 
 # RGID Examples
-Both RGID examples from the manuscript - i.e., from the primary simulation analysis and the SUD case study - are saved to the main repository directory as HTML files.
+Both RGID examples from the manuscript - i.e., from the primary simulation analysis and the SUD case study - are saved to the 'results' directory as HTML files.
 
 # Replication
 The repository contains the Jupyter Notebook used for all analyses. Interested readers can replicate the primary simulation and benchmark analyses by running all code cells sequentially. Note that we include the already-run benchmark results in the 'data' directory, which can be loaded into the Jupyter notebook without needing to be re-computed. Finally, note that the SUD case study data and dashboard object are too large for Github's file size limitations. This issue will be resolved before publication of the paper.
