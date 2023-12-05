@@ -3,11 +3,7 @@ This repository contains Python code and documentation for RGID (Rapid Global In
 
 RGID is an interactive dashboard (built on the Altair visualization library) for exploring variable effects and interactions in machine learning models. 
 
-RGID seeks to combine existing and novel interpretable ML visualizations, all in a single interactive dashboard that can be quickly produced from any scikit-learn or keras machine learning model. Planned dashboard components include:
- - Variable importance scores (decomposed into linear, nonlinear, and interaction components)
- - Partial dependence (PD) plots and accumulated local effects (ALE) plots
- - Variable importance scores and PD plots for pairwise interactions (with considerable runtime advantages over existing packages)
- - Estimated model performance from user-defined subsets of features
+RGID seeks to combine existing and novel interpretable ML visualizations, all in a single interactive dashboard that can be quickly produced from any regression or binary classification machine learning model with a .predict() (for regression) or .predict_proba() (for classification) method.
 
 # Cite
 Citaiton information will be added once the peer-review process concludes and the accompanying paper is published.
