@@ -1,0 +1,3 @@
+This directory contains data and computational results from the RGID manuscript.
+  
+  The Jupyter notebook in the 'scripts' directory can read experimental results directly from this directory, or you can re-run the results on your own machine.
