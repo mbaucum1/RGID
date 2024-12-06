@@ -35,7 +35,8 @@ run_rgid(X, y, model, metric,
              feature_imp_njobs = 1,
              propensity_njobs = 4,
              threeway_int_njobs = 4,
-             full_threeway_matrix = True):
+             full_threeway_matrix = True,
+             pdp_legend = False):
 ``` 
 Function arguments:
  - X: Tabular dataset
@@ -57,6 +58,7 @@ Function arguments:
  - feature_imp_njobs (default: 1): Number of cores to use for PD-AVID (passed to joblib's Parallel function).
  - propensity_njobs (default: 4): Number of cores to use for moderated PD function propensity scores.
  - threeway_int_njobs (default: 4): Number of cores to use for three-way H^2 calculation.
- - full_threeway_matrix (default: True): If set to True (default), Plot 5 will appear as a full matrix-style heatmap showing all tested three-way interactions with the focal variable selected in Plot 1. If False, Plot 5 will appear as a simple bar chart showing the strongest three-way interaction for each variable. 
+ - full_threeway_matrix (default: True): If set to True (default), Plot 5 will appear as a full matrix-style heatmap showing all tested three-way interactions with the focal variable selected in Plot 1. If False, Plot 5 will appear as a simple bar chart showing the strongest three-way interaction for each variable.
+ - pdp_legend (default: False): Whether to produce a legend of variable names in Plot 2 (top-right, visualizing PDPs). 
  
 
